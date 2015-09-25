@@ -1,0 +1,7 @@
+Codebook
+
+Variable Subject: This is the subject id from the raw data
+
+Variable Activity: This is the activity during which the the measurements were made.
+
+variables Remaining: These are the mean values for each subject and activity, the values are generated with the R command summarise_each(grouped_data, funs(mean)) on the raw data
