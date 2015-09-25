@@ -1,11 +1,11 @@
 #Notes:
-setwd("/home/florian/Arbeitsfläche/Data Science/Getting Data/Project")
+#setwd("/home/florian/Arbeitsfläche/Data Science/Getting Data/Project")
 
 #Download data
 #if(!exists("./data")){dir.create("./data")}
 #fileUrl<-"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 #download.file(fileUrl, destfile="data/temp.zip", method="curl")
-#Data is in folder ""data" in he working directory
+#Data is in folder ""data" in the working directory
 
 #Manual unzip
 
@@ -68,7 +68,9 @@ data.selected$Activity<-factor(data.selected$Activity, levels=levels, labels=lab
 
 ################ Task 5 ##############################
 
-grouped_data<-group_by(data.selected, Subject)
+grouped_data<-group_by(data.selected, Subject,Activity)
 
-summarize(grouped_data, v1=mean(as.numeric("tBodyAcc-mean()-X"), na.rm=TRUE))
-summarize(grouped_data$Activity)
+tidyData<-summarise_each(grouped_data, funs(mean))
+
+#writing to file
+write.table(tidyData, "tidyData.txt", row.names=FALSE)
